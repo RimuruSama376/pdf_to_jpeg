@@ -4,7 +4,8 @@ const fs = require('fs')
 const { PDFDocument } = require('pdf-lib')
 
 // Path to your PDF file
-const pdfFilePath = path.join(__dirname, 'uploads', 'assetX_march_2025.pdf')
+const fileName = 'sample.pdf' //replace with the name of your PDF
+const pdfFilePath = path.join(__dirname, 'uploads', fileName)
 const outputDir = path.join(__dirname, 'output')
 
 // Function to get total pages from PDF
@@ -27,11 +28,14 @@ async function convertPdfToJpeg() {
     console.log(`Total Pages: ${totalPages}`)
 
     // Set up pdf2pic options
+    // Set up options for pdf2pic
     const options = {
-      density: 300, // Higher for better quality
+      density: 150, // DPI (Lower to 150 for faster conversion)
       saveFilename: 'page',
       savePath: outputDir,
-      format: 'jpeg'
+      format: 'png', // Output format
+      width: 1920, // Optional width
+      height: 1080 // Optional height
     }
 
     const storeAsImage = fromPath(pdfFilePath, options)
